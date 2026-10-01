@@ -12,6 +12,6 @@ Backups are rehearsed on a rotation, not when there is time. Each drill is logge
 
 ## Log format
 
-```
+```text
 - YYYY-MM-DD: <drill>, <archive or snapshot>, <seconds>, PASSED|FAILED. Learned: <one line>. Follow-up: <TODO link or none>.
 ```
