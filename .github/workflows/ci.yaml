@@ -1,0 +1,27 @@
+name: CI
+on:
+  push:
+    branches: [main]
+  pull_request:
+jobs:
+  markdown:
+    name: Markdown lint + links
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - uses: DavidAnson/markdownlint-cli2-action@v20
+        with:
+          globs: "**/*.md"
+      - name: Internal links resolve
+        run: |
+          set -e
+          fail=0
+          for f in $(find . -name '*.md' -not -path './.git/*'); do
+            dir=$(dirname "$f")
+            for l in $(grep -oE '\]\([^)#]+\)' "$f" | sed -E 's/\]\((.*)\)/\1/' | grep -vE '^https?://'); do
+              [ -e "$dir/$l" ] || { echo "$f -> $l missing"; fail=1; }
+            done
+          done
+          exit $fail
+      - name: Receiver script parses
+        run: bash -n scripts/nas-backup-receive.sh
