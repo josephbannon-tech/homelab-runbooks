@@ -23,7 +23,7 @@ A backup is not real until a restore has been rehearsed. Every stateful service 
 | Syncthing (device identity + vault) | [restore/syncthing.md](restore/syncthing.md) | not yet (vault empty) | est. 2 min |
 | Immich database (CloudNativePG Postgres) | [restore/immich-database.md](restore/immich-database.md) | 2026-10-01 | 14 s for the restore itself |
 | Sealed Secrets sealing keys | [restore/sealed-secrets-keys.md](restore/sealed-secrets-keys.md) | 2026-09-09 (7 of 7 decrypt) | seconds; must precede the app-of-apps |
-| Proxmox guest from a vzdump archive | [restore/proxmox-guest-from-vzdump.md](restore/proxmox-guest-from-vzdump.md) | 2026-09-08 (LXC, 31 s) | 1 to 5 min |
+| Proxmox guest from a vzdump archive | [restore/proxmox-guest-from-vzdump.md](restore/proxmox-guest-from-vzdump.md) | 2026-11-23 (VM, 34 s); 2026-09-08 (LXC, 31 s) | 1 to 5 min |
 | Off-site seed (restic to cloud storage) | [restore/offsite-seed.md](restore/offsite-seed.md) | 2026-08-30 | 13 s for 666 MiB |
 
 ## Drills

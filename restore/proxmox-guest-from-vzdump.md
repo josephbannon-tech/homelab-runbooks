@@ -23,8 +23,13 @@
    ```bash
    qmrestore <archive> 905 --storage local-lvm --unique 1
    qm set 905 --onboot 0 --net0 virtio=<MAC>,bridge=vmbr0,link_down=1 --delete startup
-   qm start 905   # check via the console, not SSH
+   qm start 905   # check via the console or the guest agent, not SSH
    ```
+
+   Two things the first VM drill showed (2026-11-23):
+
+   - `--unique` regenerates the MAC and UUIDs but keeps `onboot: 1` and the `startup` order from the archive. The `qm set` line above is what stops the copy starting itself at the next host boot, so run it before `qm start`, every time.
+   - A disk marked `backup=0` is not in the archive, and its line is dropped from the restored config. For a drill that is harmless. For a real restore, re-create that disk and whatever lives on it before the services that need it will start.
 
 3. Prove the service inside (the restore is not done when the guest boots; it is done when the service answers).
 4. Destroy the drill guest: `pct destroy 905 --purge` / `qm destroy 905 --purge`.
